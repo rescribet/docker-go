@@ -38,10 +38,10 @@ func bakeImage() {
 	transformScratchDockerfile(tScratchFile)
 	bakeCmd := exec.Command(
 		"docker", "build",
-		"-t", fullProjectPath(),
+		"-t", *imageName,
 		"-f", tScratchFile,
 		fmt.Sprintf("%s%s", os.Getenv("GOPATH"), *projectName),
 	)
 	executeCommand(bakeCmd)
-	fmt.Println(fullProjectPath())
+	fmt.Println(*imageName)
 }

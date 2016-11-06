@@ -5,6 +5,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"math/rand"
 	"os/exec"
+	"strings"
 	"time"
 )
 
@@ -57,7 +58,8 @@ func removeArtifactContainer(artContName string) {
 
 func generateArtifact(filename string, goos string) {
 	rand := randomString(10)
-	artContName := fmt.Sprintf("build-img-%s-cont-%s-%s", *imageName, filename, rand)
+	safeImageName := strings.Replace(*imageName, "/", "-", -1)
+	artContName := fmt.Sprintf("build-img-%s-cont-%s-%s", safeImageName, filename, rand)
 	defer removeArtifactContainer(artContName)
 	log.Debug(fmt.Sprintf("Building artifact '%s/%s'", artContName, filename))
 	buildArtifact(artContName, filename, goos)

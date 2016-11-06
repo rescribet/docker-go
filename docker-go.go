@@ -15,7 +15,7 @@ var (
 	artifacts   = flag.String("artifacts", "go-artifacts", "The name of the artifacts folder")
 	buildfile   = flag.String("build-file", defaultBuildfile(), "Location of the dockerfile to use for building the executable")
 	scratchfile = flag.String("scratch-file", defaultScratchfile(), "Location of the dockerfile to use for building the final image")
-	imageName   = flag.String("name", filepath.Base(*projectName), "The name of the image to bake")
+	imageName   = flag.String("name", fullProjectPath(), "The name of the image to bake")
 	projectName = flag.String("project", curProject(), "The (import) name of the project to be built")
 	execName    = flag.String("filename", "main", "The name of the executable to be generated")
 	verbose     = flag.Bool("v", false, "Verbose output")
